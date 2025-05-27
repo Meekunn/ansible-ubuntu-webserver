@@ -1,26 +1,32 @@
 # Ansible Ubuntu Webserver
 
-This repository contains a simple Ansible playbook that provisions an Apache web server on Ubuntu with **seven** clearly defined tasks.
+A minimal Ansible repo that turns a fresh Ubuntu 20.04/22.04 VM into a basic Apache web server—in **seven** idempotent tasks. The variable file now shows examples of the five variable types your platform supports: **string, number, boolean, password, and domain**.
+
+---
 
 ## Tasks performed
 1. Update the APT cache  
 2. Upgrade all packages  
 3. Install Apache & UFW  
-4. Deploy a custom `index.html` from a Jinja2 template  
+4. Deploy a templated `index.html`  
 5. Ensure Apache is enabled and running  
-6. Configure UFW to allow HTTP (80) & HTTPS (443)  
+6. Open HTTP (80) & HTTPS (443) in UFW  
 7. Create an admin user with sudo privileges
 
-## Prerequisites
-* Ansible 2.15+ on your control machine (Linux/macOS/WSL)  
-* A target VM running **Ubuntu 20.04 / 22.04** reachable via SSH  
-* SSH key‑based access (password works too—configure in `hosts.ini`)
+---
 
-## Quick Start
+## Prerequisites
+* Ansible 2.15+ on your control machine (Linux/macOS/WSL)  
+* An Ubuntu VM reachable via SSH (20.04 or 22.04)  
+* SSH key‑based or password authentication
+
+---
+
+## Quick Start
 ```bash
 git clone https://github.com/youruser/ansible-ubuntu-webserver.git
 cd ansible-ubuntu-webserver
-
+```
 # Edit inventory
 nano inventory/hosts.ini
 
