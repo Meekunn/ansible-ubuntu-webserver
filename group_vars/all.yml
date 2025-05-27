@@ -1,0 +1,7 @@
+---
+new_user_name: deploy
+web_root: /var/www/html
+firewall_allowed_ports:
+  - "80"
+  - "443"
+index_title: "Hello from Ansible"

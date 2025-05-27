@@ -1,0 +1,57 @@
+---
+# 1. Update apt cache
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  tags: update
+
+# 2. Upgrade all packages
+- name: Upgrade all packages
+  apt:
+    upgrade: dist
+  tags: upgrade
+
+# 3. Install required packages
+- name: Install required packages
+  apt:
+    name:
+      - apache2
+      - ufw
+    state: present
+  tags: packages
+
+# 4. Deploy custom index page
+- name: Deploy custom index page
+  template:
+    src: index.html.j2
+    dest: "{{ web_root }}/index.html"
+    owner: www-data
+    group: www-data
+    mode: "0644"
+  tags: website
+
+# 5. Ensure Apache is enabled and running
+- name: Ensure Apache is enabled and running
+  service:
+    name: apache2
+    state: started
+    enabled: yes
+  tags: apache
+
+# 6. Configure UFW to allow HTTP/HTTPS
+- name: Configure UFW to allow HTTP/HTTPS
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+  loop: "{{ firewall_allowed_ports }}"
+  tags: firewall
+
+# 7. Create admin user
+- name: Create admin user
+  user:
+    name: "{{ new_user_name }}"
+    groups: sudo
+    append: yes
+    create_home: yes
+    shell: /bin/bash
+  tags: user
