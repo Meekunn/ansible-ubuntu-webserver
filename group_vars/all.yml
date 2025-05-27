@@ -1,7 +1,16 @@
 ---
-new_user_name: deploy
-web_root: /var/www/html
-firewall_allowed_ports:
-  - "80"
-  - "443"
-index_title: "Hello from Ansible"
+# === String variables ===
+new_user_name: deploy            # string
+authorized_email: admin@example.com  # string (example of additional string var)
+web_root: /var/www/html          # string
+index_title: "Hello from Ansible"  # string
+
+# === Number / List variables ===
+firewall_allowed_ports:          # list of numbers
+  - 80
+  - 443
+
+# === Password & Domain variables (key‑only) ===
+# The backend/platform will inject the actual values at runtime.
+mysql_root_password:             # password
+app_internal_domain:             # domain
