@@ -39,7 +39,7 @@
   tags: apache
 
 # 6. Configure UFW to allow HTTP/HTTPS
-- name: Configure UFW to allow HTTP/HTTPS
+- name: Configure UFW
   ufw:
     rule: allow
     port: "{{ item }}"
